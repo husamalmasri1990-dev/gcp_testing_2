@@ -1,3 +1,5 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
 steps:
   # Build
   - name: 'gcr.io/cloud-builders/docker'
@@ -26,8 +28,10 @@ steps:
       - --allow-unauthenticated
       - --service-account=cloud-run-sa@tf-pipeline-492916.iam.gserviceaccount.com
 
-substitutions:
-  _REGION: us-central1
+
 
 images:
   - ${_REGION}-docker.pkg.dev/tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
+
+substitutions:
+  _REGION: us-central1
