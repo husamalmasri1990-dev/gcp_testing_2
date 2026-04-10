@@ -4,14 +4,14 @@ steps:
     args:
       - build
       - -t
-      - ${_REGION}-docker.pkg.dev/$tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
+      - ${_REGION}-docker.pkg.dev/tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
       - app/
 
   # Push
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - ${_REGION}-docker.pkg.dev/$tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
+      - ${_REGION}-docker.pkg.dev/tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
 
   # Deploy
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -20,14 +20,14 @@ steps:
       - run
       - deploy
       - gemini-adk-agent
-      - --image=${_REGION}-docker.pkg.dev/$tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
+      - --image=${_REGION}-docker.pkg.dev/tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
       - --region=${_REGION}
       - --platform=managed
       - --allow-unauthenticated
-      - --service-account=cloud-run-sa@$tf-pipeline-492916.iam.gserviceaccount.com
+      - --service-account=cloud-run-sa@tf-pipeline-492916.iam.gserviceaccount.com
 
 substitutions:
   _REGION: us-central1
 
 images:
-  - ${_REGION}-docker.pkg.dev/$tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
+  - ${_REGION}-docker.pkg.dev/tf-pipeline-492916/gemini-repo/app:$SHORT_SHA
